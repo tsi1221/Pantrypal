@@ -1,8 +1,3 @@
-Absolutely Tsehaynesh! Let’s map out **the full step-by-step frontend plan for Dopantry Pal** based on your **backend**. I’ll include **all pages, components, attributes, API integration, and functionality** so you can build an MVP that works end-to-end.
-
----
-
-# Dopantry Pal Frontend Step-by-Step Plan
 
 ## 1️⃣ Folder Structure
 
@@ -12,10 +7,9 @@ dopantry-pal-frontend/
 │   └─ index.html
 ├─ src/
 │   ├─ api/                 
-│   │   └─ api.js           # Axios instance
+│   │   └─ api.js          
 │   ├─ assets/                    
-│   │   ├─ images/          # icons, logos
-│   │   └─ logos/
+
 │   ├─ components/                
 │   │   ├─ Navbar/
 │   │   │   ├─ Navbar.jsx
@@ -51,204 +45,114 @@ dopantry-pal-frontend/
 │   │   └─ Profile/
 │   │       ├─ Profile.jsx
 │   │       └─ Profile.css
-│   ├─ utils/                    
-│   │   └─ helpers.js            # date formatting, validation
+│   │
 │   ├─ App.jsx
 │   ├─ App.css
 │   ├─ main.jsx
 │   └─ index.css
 ├─ package.json
 └─ vite.config.js
-```
+🥕 PantryPal Frontend – Smart Kitchen Assistant
+PantryPal frontend is a React.js application that provides a user-friendly interface to manage your kitchen inventory, track expiry dates, and organize food items efficiently.
 
----
+📌 Features
 
-## 2️⃣ Axios API Setup (`src/api/api.js`)
 
-```js
-import axios from "axios";
+Food Inventory Dashboard – View all items in your pantry, fridge, and freezer.
 
-const API = axios.create({
-  baseURL: "http://localhost:5000/api", // your backend URL
-});
 
-// Add JWT token automatically
-API.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
-  if (token) config.headers.Authorization = `Bearer ${token}`;
-  return config;
-});
+Add/Edit/Delete Items – Quickly manage your food items.
 
-export default API;
-```
 
----
+Expiry Notifications – Visual indicators for items nearing expiry.
 
-## 3️⃣ Auth Context (`src/context/AuthContext.jsx`)
 
-* Holds `user` and `token`
-* Handles `login`, `logout`, `register`
-* Exposes to all components
+Responsive Design – Works seamlessly on desktop and mobile.
 
-```js
-import { createContext, useState, useEffect } from "react";
-import API from "../api/api";
 
-export const AuthContext = createContext();
+Interactive UI – Smooth navigation with React Router.
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem("token") || "");
 
-  useEffect(() => {
-    if (token) {
-      API.get("/auth/me")
-        .then((res) => setUser(res.data))
-        .catch(() => logout());
-    }
-  }, [token]);
 
-  const login = async (email, password) => {
-    const res = await API.post("/auth/login", { email, password });
-    setUser(res.data.user);
-    setToken(res.data.token);
-    localStorage.setItem("token", res.data.token);
-  };
+🛠️ Technology Stack
 
-  const register = async (name, email, password) => {
-    const res = await API.post("/auth/register", { name, email, password });
-    setUser(res.data.user);
-    setToken(res.data.token);
-    localStorage.setItem("token", res.data.token);
-  };
 
-  const logout = () => {
-    setUser(null);
-    setToken("");
-    localStorage.removeItem("token");
-  };
+Framework: React.js
 
-  return (
-    <AuthContext.Provider value={{ user, token, login, logout, register }}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
-```
 
----
+Routing: React Router
 
-## 4️⃣ Pages & Attributes
 
-### **Login Page**
+API Calls: Axios
 
-* Inputs: `email`, `password`
-* Button: `Login`
-* Redirect: `/dashboard` after login
 
-### **Register Page**
+Styling: External CSS, Responsive Design
 
-* Inputs: `name`, `email`, `password`
-* Button: `Register`
-* Redirect: `/dashboard` after register
 
-### **Dashboard Page**
+Deployment: Vercel
 
-* Show summary: total items, expiring soon, alerts count
-* Links to `Pantry`, `Alerts`, `Profile`
 
-### **Pantry Page**
 
-* Display all items (`ItemCard`)
-* Each item attributes:
+⚡ Getting Started – Run Locally
+1️⃣ Clone the Repository
+git clone https://github.com/tsi1221/Panterypal.git
+cd Panterypal/frontend
 
-```
-userId
-name
-category
-quantity
-unit
-location
-purchaseDate
-expiryDate
-notes
-imageUrl
-barcode
-```
 
-* Buttons: `Edit`, `Delete`, `Add New Item`
-* Expiry highlight: red if expiring soon
+2️⃣ Install Dependencies
+npm install
 
-### **Alerts Page**
 
-* Display all alerts (`AlertCard`)
-* Attributes: `item name`, `expiryDate`, `seen`
-* Action: mark as seen (`PUT /alerts/:id/seen`)
+3️⃣ Configure API URL
 
-### **Profile Page**
 
-* Display user info (`name`, `email`, `avatarUrl`)
-* Edit profile optional
+Open src/api.js (or wherever API calls are defined).
 
----
 
-## 5️⃣ Components
+Replace the backend URL with your local or deployed backend endpoint. Example:
 
-* **Navbar** → navigation links: Dashboard, Pantry, Alerts, Profile, Logout
-* **ItemCard** → shows item info, edit/delete buttons
-* **AlertCard** → shows alerts info
-* **ProtectedRoute** → redirects to `/login` if not logged in
-* **Loader** → optional loading spinner
 
----
+export const API_URL = "http://localhost:5000"; // or [Render backend URL](https://panterypalsideback.onrender.com)
 
-## 6️⃣ Step-by-Step Implementation
 
-### Step 1: Setup Vite + React + Axios
+4️⃣ Start the Frontend
+npm start
 
-```bash
-npm create vite dopantry-pal-frontend
-npm install react-router-dom axios validator dayjs
-```
 
-### Step 2: Create Folder Structure
 
-Follow the **folders above**, separate CSS per page/component
+The app will run on http://localhost:5173 by default.
 
-### Step 3: Setup `api.js` and `AuthContext.jsx`
 
-### Step 4: Create Public Pages
+Make sure your backend server is running and CORS is configured for http://localhost:5173.
 
-* Login / Register (standalone first, then connect AuthContext)
 
-### Step 5: Setup Routing
 
-* Use **React Router v6** in `App.jsx`
-* Wrap App in `<BrowserRouter>` in `main.jsx`
+5️⃣ Using the Application
 
-### Step 6: Build Components
 
-* Navbar, ItemCard, AlertCard, ProtectedRoute
+Open http://localhost:5173 in your browser.
 
-### Step 7: Connect Pantry & Alerts Pages
 
-* Use **API calls** to fetch/create/update/delete items & alerts
+Register or log in with your account.
 
-### Step 8: Add Profile Page
 
-* Display user info, optional edit
+Add, edit, or remove items in your pantry, fridge, or freezer.
 
-### Step 9: Styling
 
-* Add **CSS for each component/page**
-* Use responsive design
+Track expiry dates and stay organized.
 
-### Step 10: Test Frontend
 
-* Check all routes, CRUD operations, alerts, auth flow
 
----
+🌐 Deployment
 
-If you want, I can **write a full ready-to-run `Login`, `Register`, `Dashboard`, `Pantry`, `Alerts`, `Profile` pages with Axios integration** so you just copy them into your frontend folder and connect to your backend immediately.
 
-Do you want me to do that next?
+Frontend Live Demo: https://pantrypal-e.vercel.app/
+
+
+CORS is configured to allow this origin on the backend.
+
+Fork the repository.
+
+
+
+✅ The PantryPal frontend is designed to make kitchen management simple and intuitive. I’m proud of this work — it’s clean, responsive, and practical!
