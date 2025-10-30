@@ -1,0 +1,295 @@
+/* Pantry Modal Styles - Ultra Compact Two Columns */
+.pantry-container {
+  background: white;
+  padding: 16px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 0;
+}
+
+.pantry-container h2 {
+  color: #2d3748;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  text-align: left;
+  padding: 0;
+}
+
+/* Error Message */
+.error {
+  background: #fed7d7;
+  color: #c53030;
+  padding: 6px 10px;
+  border-radius: 4px;
+  margin: 0 0 10px 0;
+  text-align: center;
+  border-left: 2px solid #e53e3e;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* Ultra Compact Two Column Form Design */
+.pantry-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: 100%;
+}
+
+.pantry-form label {
+  color: #2d3748;
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 3px;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.pantry-form input,
+.pantry-form select {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  font-size: 12px;
+  transition: all 0.1s ease;
+  background: white;
+  box-sizing: border-box;
+  font-family: inherit;
+  min-height: 30px;
+}
+
+.pantry-form input:focus,
+.pantry-form select:focus {
+  outline: none;
+  border-color: #48bb78;
+  box-shadow: 0 0 0 1px rgba(72, 187, 120, 0.2);
+}
+
+/* Full-width fields (last 4 items) */
+.pantry-form > div:nth-last-child(4),
+.pantry-form > div:nth-last-child(3),
+.pantry-form > div:nth-last-child(2),
+.pantry-form > div:last-child {
+  grid-column: 1 / -1;
+}
+
+/* Compact Submit Button */
+.pantry-form button {
+  padding: 8px 12px;
+  background: #48bb78;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  margin-top: 4px;
+  min-height: 30px;
+  grid-column: 1 / -1;
+}
+
+.pantry-form button:hover {
+  background: #38a169;
+}
+
+/* Form Field Styling */
+.pantry-form input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.pantry-form input[type="number"]::-webkit-outer-spin-button,
+.pantry-form input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.pantry-form select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%234a5568'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+  background-size: 10px;
+  padding-right: 22px;
+}
+
+/* Date input styling */
+.pantry-form input[type="date"] {
+  cursor: pointer;
+}
+
+/* Placeholder styling */
+.pantry-form input::placeholder {
+  color: #a0aec0;
+  font-weight: 400;
+  font-size: 11px;
+}
+
+/* Required field indicators */
+.pantry-form label:has(+ input:required)::after,
+.pantry-form label:has(+ select:required)::after {
+  content: " *";
+  color: #e53e3e;
+  font-size: 10px;
+}
+
+/* Loading state for button */
+.pantry-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .pantry-container {
+    padding: 12px;
+    max-width: 100%;
+  }
+  
+  .pantry-container h2 {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+  
+  .pantry-form {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .pantry-form input,
+  .pantry-form select {
+    padding: 5px 7px;
+    font-size: 12px;
+    min-height: 28px;
+  }
+  
+  .pantry-form button {
+    padding: 7px 10px;
+    font-size: 11px;
+    min-height: 28px;
+  }
+  
+  .error {
+    padding: 5px 8px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pantry-container {
+    padding: 10px;
+  }
+  
+  .pantry-container h2 {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  
+  .pantry-form {
+    gap: 6px;
+  }
+  
+  .pantry-form input,
+  .pantry-form select {
+    padding: 4px 6px;
+    font-size: 11px;
+    min-height: 26px;
+  }
+  
+  .pantry-form button {
+    padding: 6px 8px;
+    font-size: 11px;
+    min-height: 26px;
+  }
+  
+  .error {
+    padding: 4px 6px;
+    font-size: 10px;
+  }
+}
+
+/* Animation for form appearance */
+@keyframes formSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pantry-form {
+  animation: formSlideIn 0.2s ease-out;
+}
+
+/* Success state animation */
+@keyframes successPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(72, 187, 120, 0.3);
+  }
+  70% {
+    box-shadow: 0 0 0 3px rgba(72, 187, 120, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(72, 187, 120, 0);
+  }
+}
+
+.pantry-form button.success {
+  animation: successPulse 0.3s ease-in-out;
+}
+
+/* Compact form field heights */
+.pantry-form input,
+.pantry-form select,
+.pantry-form button {
+  line-height: 1.1;
+}
+
+/* Reduce label line height */
+.pantry-form label {
+  line-height: 1.1;
+}
+
+/* Date input custom styling */
+.pantry-form input[type="date"] {
+  position: relative;
+}
+
+.pantry-form input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+}
+
+/* Number input styling */
+.pantry-form input[type="number"] {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Select option styling */
+.pantry-form option {
+  padding: 3px 6px;
+  font-size: 11px;
+}
+
+/* Enhanced focus indicators */
+.pantry-form input:focus-visible,
+.pantry-form select:focus-visible {
+  outline: 1px solid #48bb78;
+  outline-offset: 0;
+}
